@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import { motion } from "framer-motion";
-import emailjs from "emailjs-com";
+import emailjs from "@emailjs/browser";
+
+
 
 import githubLogo from "../../public/github.png";
 import linkedinLogo from "../../public/linkedin.png";
@@ -10,7 +12,7 @@ import instagramLogo from "../../public/insta.png";
 import facebookLogo from "../../public/facebook.png";
 
 import "../CSS/Contact.css"
-import '../index.css' 
+import '../index.css'
 
 export default function Contact() {
   const [form, setForm] = useState({
@@ -42,18 +44,18 @@ export default function Contact() {
 
     setStatus("Sending...");
 
-    emailjs
-      .send(
-        import.meta.env.VITE_EMAILJS_SERVICE_ID,
-        import.meta.env.VITE_EMAILJS_TEMPLATE_ID,
-        {
-          from_name: form.name,
-          contact_info: form.contact,
-          subject: form.subject,
-          message: form.message,
-        },
-        import.meta.env.VITE_EMAILJS_PUBLIC_KEY
-      )
+    emailjs.send(
+      import.meta.env.VITE_EMAILJS_SERVICE_ID,
+      import.meta.env.VITE_EMAILJS_TEMPLATE_ID,
+      {
+        from_name: form.name,
+        contact_info: form.contact,
+        subject: form.subject,
+        message: form.message,
+      },
+      import.meta.env.VITE_EMAILJS_PUBLIC_KEY
+    )
+
       .then(
         () => {
           setStatus("✅ Message sent successfully!");
